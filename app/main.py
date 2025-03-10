@@ -49,4 +49,15 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         content=error_response.dict()
     )
 
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    import traceback
+    error_details = traceback.format_exc()
+    logger.error(f"Unhandled exception: {error_details}")
+    error_response = ErrorResponse(status=500, message=f"Internal Server Error: {str(exc)}")
+    return JSONResponse(
+        status_code=500,
+        content=error_response.dict()
+    )
+
 app.include_router(router)
