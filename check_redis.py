@@ -9,11 +9,11 @@ async def check_redis_entry(key_pattern="presentation:*"):
     try:
         # Connect to Redis
         redis_client = redis_async.Redis(
-            host=os.getenv('REDIS_HOST', '0.0.0.0'),
+            host=os.getenv('REDIS_HOST', 'localhost'),
             port=int(os.getenv('REDIS_PORT', 6379)),
             db=int(os.getenv('REDIS_DB', 0)),
             decode_responses=True,
-            socket_connect_timeout=2
+            socket_connect_timeout=5
         )
         
         # Test the connection
