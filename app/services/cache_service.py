@@ -1,7 +1,6 @@
 from redis.asyncio import Redis
 from abc import ABC, abstractmethod
 import os
-
 class CacheInterface(ABC):
     @abstractmethod
     async def get(self, key: str): pass
